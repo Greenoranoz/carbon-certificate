@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Attestation ORANOZGREEN</title>
+  <style>
+    /* نفس تصميم الفورم */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: #0e1512;
+      font-family: 'Segoe UI', Inter, Arial, sans-serif;
+      color: #c9d6c9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .attestation {
+      width: 100%;
+      max-width: 800px;
+      background: #141f1a;
+      border: 1.5px solid #2a352e;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    /* ... (باقي الـ CSS كما هو) ... */
+  </style>
+</head>
+<body>
+
+<div class="attestation" id="certificat">
+  <!-- سيتم ملء البيانات تلقائياً -->
+</div>
+
+<script>
+  // قراءة البيانات من الرابط (URL parameters)
+  const params = new URLSearchParams(window.location.search);
+  
+  const data = {
+    entreprise: params.get('entreprise') || '—',
+    produit: params.get('produit') || '—',
+    co2Kg: params.get('co2') || '0.00',
+    co2Tonnes: params.get('tonnes') || '0.000',
+    hash: params.get('hash') || '—',
+    date: params.get('date') || '—'
+  };
+  
+  // ملء الشهادة بالبيانات
+  document.getElementById('certificat').innerHTML = `
+    <div class="header">
+      <div class="logo-box">🌿</div>
+      <div class="header-text">
+        <h1>PROTOCOLE ORANOZGREEN</h1>
+        <span>Fleet Logistics · Carbon Attestation</span>
+      </div>
+    </div>
+    <div class="titre">
+      <h2>Attestation d'Empreinte Carbone</h2>
+      <p>Traçabilité transport & bilan carbone</p>
+    </div>
+    <div class="content">
+      <p><strong>Entreprise:</strong> ${data.entreprise}</p>
+      <p><strong>Produit:</strong> ${data.produit}</p>
+      <p><strong>CO₂:</strong> ${data.co2Kg} kg / ${data.co2Tonnes} Tonnes</p>
+      <p><strong>Hash:</strong> ${data.hash}</p>
+      <p><strong>Date:</strong> ${data.date}</p>
+    </div>
+  `;
+</script>
+
+</body>
+</html>
